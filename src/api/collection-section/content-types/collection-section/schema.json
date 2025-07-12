@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "collection_sections",
+  "info": {
+    "singularName": "collection-section",
+    "pluralName": "collection-sections",
+    "displayName": "🧳 collection_section"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "products": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product",
+      "inversedBy": "collection_sections"
+    },
+    "banner_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "is_featured": {
+      "type": "boolean",
+      "required": true
+    },
+    "start_date": {
+      "type": "datetime"
+    },
+    "end_date": {
+      "type": "datetime"
+    },
+    "seo_meta": {
+      "type": "component",
+      "component": "seo-meta.seo-meta",
+      "repeatable": true
+    }
+  }
+}

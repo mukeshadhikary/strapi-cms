@@ -1,0 +1,60 @@
+{
+  "kind": "collectionType",
+  "collectionName": "payment_users",
+  "info": {
+    "singularName": "payment-user",
+    "pluralName": "payment-users",
+    "displayName": "💲 payment"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "order_collection": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::order-collection.order-collection",
+      "mappedBy": "payment_user"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "payment_users"
+    },
+    "payment_method": {
+      "type": "string"
+    },
+    "payment_status": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "completed",
+        "failed",
+        "refunded"
+      ]
+    },
+    "transaction_id": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "decimal"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "paid_at": {
+      "type": "datetime"
+    },
+    "payment_note": {
+      "type": "text"
+    },
+    "metadata": {
+      "type": "json"
+    }
+  }
+}

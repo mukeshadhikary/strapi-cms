@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_meta_keywords_meta_keywords",
+  "info": {
+    "displayName": "meta_keywords"
+  },
+  "options": {},
+  "attributes": {
+    "values": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 20
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,108 @@
+{
+  "kind": "collectionType",
+  "collectionName": "order_collections",
+  "info": {
+    "singularName": "order-collection",
+    "pluralName": "order-collections",
+    "displayName": "📝 order_collection"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "order_collections"
+    },
+    "order_items_collections": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::order-items-collection.order-items-collection",
+      "mappedBy": "order_collection"
+    },
+    "order_number": {
+      "type": "uid",
+      "required": true
+    },
+    "order_status": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "paid",
+        "shipped",
+        "delivered",
+        "cancelled",
+        "refunded"
+      ]
+    },
+    "total_price": {
+      "type": "decimal"
+    },
+    "shipping_cost": {
+      "type": "decimal"
+    },
+    "final_total": {
+      "type": "decimal"
+    },
+    "total_discount": {
+      "type": "decimal"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "payment_method": {
+      "type": "enumeration",
+      "enum": [
+        "eSewa",
+        "Khalti",
+        "IME Pay",
+        "PrabhuPay",
+        "NamastePay",
+        "CellPay",
+        "Moru",
+        "QPay",
+        "PayWell",
+        "Hamro Pay",
+        "Cards",
+        "COD",
+        "PayPal",
+        "Wise",
+        "SWIFT",
+        "IME",
+        "WesternUnion"
+      ]
+    },
+    "payment_status": {
+      "type": "enumeration",
+      "default": "unpaid",
+      "enum": [
+        "unpaid",
+        "paid",
+        "failed",
+        "refunded"
+      ]
+    },
+    "shipping_address": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::shipping-address.shipping-address"
+    },
+    "billing_address": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::billing-address.billing-address"
+    },
+    "customer_message": {
+      "type": "text"
+    },
+    "payment_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::payment-user.payment-user",
+      "inversedBy": "order_collection"
+    }
+  }
+}

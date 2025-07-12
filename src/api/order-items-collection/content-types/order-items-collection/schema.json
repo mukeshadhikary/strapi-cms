@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "order_items_collections",
+  "info": {
+    "singularName": "order-items-collection",
+    "pluralName": "order-items-collections",
+    "displayName": "🗳️ order_items_collection"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "order_collection": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::order-collection.order-collection",
+      "inversedBy": "order_items_collections"
+    },
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product.product",
+      "inversedBy": "order_items_collections"
+    },
+    "product_option": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product-option.product-option",
+      "inversedBy": "order_items_collections"
+    },
+    "quantity": {
+      "type": "integer"
+    },
+    "unit_price": {
+      "type": "decimal"
+    },
+    "total_price": {
+      "type": "decimal"
+    },
+    "metadata": {
+      "type": "json"
+    }
+  }
+}

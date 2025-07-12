@@ -1,0 +1,64 @@
+{
+  "kind": "collectionType",
+  "collectionName": "transactions",
+  "info": {
+    "singularName": "transaction",
+    "pluralName": "transactions",
+    "displayName": "💱transaction"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "order_collection": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::order-collection.order-collection"
+    },
+    "payment": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::payment-user.payment-user"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "payment_in",
+        "refund",
+        "payout",
+        "fee",
+        "adjustment",
+        "other"
+      ]
+    },
+    "amount": {
+      "type": "decimal"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "transaction_status": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "success",
+        "failed"
+      ]
+    },
+    "reference_id": {
+      "type": "uid"
+    },
+    "note": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "json"
+    }
+  }
+}

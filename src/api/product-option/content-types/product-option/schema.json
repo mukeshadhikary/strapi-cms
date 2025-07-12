@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "product_options",
+  "info": {
+    "singularName": "product-option",
+    "pluralName": "product-options",
+    "displayName": "ᯓ product_option"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product.product",
+      "inversedBy": "productOptions"
+    },
+    "Size_And_Color": {
+      "type": "component",
+      "component": "product-variations.attributes",
+      "repeatable": true
+    },
+    "item_in_cart": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::item-in-cart.item-in-cart",
+      "mappedBy": "product_option"
+    },
+    "order_items_collections": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::order-items-collection.order-items-collection",
+      "mappedBy": "product_option"
+    }
+  }
+}

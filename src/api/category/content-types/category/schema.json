@@ -4,7 +4,7 @@
   "info": {
     "singularName": "category",
     "pluralName": "categories",
-    "displayName": "Category",
+    "displayName": "☰ Category",
     "description": "Organize your content into categories"
   },
   "options": {
@@ -13,19 +13,29 @@
   "pluginOptions": {},
   "attributes": {
     "name": {
-      "type": "string"
-    },
-    "slug": {
-      "type": "uid"
-    },
-    "articles": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::article.article",
-      "mappedBy": "category"
+      "type": "string",
+      "required": true
     },
     "description": {
       "type": "text"
+    },
+    "color": {
+      "type": "string",
+      "required": true
+    },
+    "icon": {
+      "type": "string"
+    },
+    "subCategories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category.category"
+    },
+    "products": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product",
+      "inversedBy": "sub_categories"
     }
   }
 }

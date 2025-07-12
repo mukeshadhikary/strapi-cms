@@ -1,0 +1,67 @@
+{
+  "kind": "collectionType",
+  "collectionName": "shipping_addresses",
+  "info": {
+    "singularName": "shipping-address",
+    "pluralName": "shipping-addresses",
+    "displayName": "🗺️ shipping_address"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "users": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "shipping_address"
+    },
+    "is_default": {
+      "type": "boolean"
+    },
+    "label": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 20
+    },
+    "full_name": {
+      "type": "string"
+    },
+    "phone_number": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 14
+    },
+    "province": {
+      "type": "enumeration",
+      "enum": [
+        "province - 1",
+        "province - 2",
+        "province - 3",
+        "province - 4",
+        "province - 5",
+        "province - 6",
+        "province - 7"
+      ]
+    },
+    "district": {
+      "type": "string"
+    },
+    "municipality": {
+      "type": "string"
+    },
+    "ward_number": {
+      "type": "integer"
+    },
+    "tole": {
+      "type": "string"
+    },
+    "zip_code": {
+      "type": "string"
+    },
+    "delivery_instructions": {
+      "type": "text"
+    }
+  }
+}

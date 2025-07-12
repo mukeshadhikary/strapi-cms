@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_seo_meta_seo_metas",
+  "info": {
+    "displayName": "SEO_META"
+  },
+  "options": {},
+  "attributes": {
+    "meta_title": {
+      "type": "string"
+    },
+    "meta_description": {
+      "type": "text"
+    },
+    "keys": {
+      "type": "component",
+      "component": "meta-keywords.meta-keywords",
+      "repeatable": true
+    },
+    "meta_image_url": {
+      "type": "string"
+    },
+    "no_index": {
+      "type": "boolean"
+    },
+    "structured_data": {
+      "type": "json"
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,68 @@
+{
+  "kind": "collectionType",
+  "collectionName": "billing_addresses",
+  "info": {
+    "singularName": "billing-address",
+    "pluralName": "billing-addresses",
+    "displayName": "🗺️ billing_address"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "users": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "billing_address"
+    },
+    "is_default": {
+      "type": "boolean"
+    },
+    "label": {
+      "type": "string"
+    },
+    "full_name": {
+      "type": "string"
+    },
+    "phone_number": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 14
+    },
+    "email": {
+      "type": "email"
+    },
+    "province": {
+      "type": "enumeration",
+      "enum": [
+        "province - 1",
+        "province - 2",
+        "province - 3",
+        "province - 4",
+        "province - 5",
+        "province - 6",
+        "province - 7"
+      ]
+    },
+    "district": {
+      "type": "string"
+    },
+    "municipality": {
+      "type": "string"
+    },
+    "ward_number": {
+      "type": "integer"
+    },
+    "tole": {
+      "type": "string"
+    },
+    "zip_code": {
+      "type": "string"
+    },
+    "billing_instructions": {
+      "type": "text"
+    }
+  }
+}
