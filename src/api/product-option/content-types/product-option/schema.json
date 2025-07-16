@@ -33,6 +33,12 @@
       "relation": "oneToMany",
       "target": "api::order-items-collection.order-items-collection",
       "mappedBy": "product_option"
+    },
+    "inventories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::inventory.inventory",
+      "mappedBy": "product_option"
     }
   }
 }

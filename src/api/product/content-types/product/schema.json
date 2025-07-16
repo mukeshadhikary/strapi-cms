@@ -114,6 +114,18 @@
       "relation": "oneToMany",
       "target": "api::order-items-collection.order-items-collection",
       "mappedBy": "product"
+    },
+    "inventories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::inventory.inventory",
+      "mappedBy": "product"
+    },
+    "wishlists": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::wishlist.wishlist",
+      "inversedBy": "products"
     }
   }
 }

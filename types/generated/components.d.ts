@@ -14,6 +14,18 @@ export interface MetaKeywordsMetaKeywords extends Struct.ComponentSchema {
   };
 }
 
+export interface ProductSizeSize extends Struct.ComponentSchema {
+  collectionName: 'components_product_size_sizes';
+  info: {
+    displayName: 'Size';
+  };
+  attributes: {
+    base_cm: Schema.Attribute.Integer;
+    height: Schema.Attribute.Integer;
+    length_cm: Schema.Attribute.Integer;
+  };
+}
+
 export interface ProductVariationsAttributes extends Struct.ComponentSchema {
   collectionName: 'components_product_variations_attributes';
   info: {
@@ -112,6 +124,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'meta-keywords.meta-keywords': MetaKeywordsMetaKeywords;
+      'product-size.size': ProductSizeSize;
       'product-variations.attributes': ProductVariationsAttributes;
       'seo-meta.seo-meta': SeoMetaSeoMeta;
       'shared.media': SharedMedia;

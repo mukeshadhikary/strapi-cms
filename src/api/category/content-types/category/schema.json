@@ -36,6 +36,9 @@
       "relation": "manyToMany",
       "target": "api::product.product",
       "inversedBy": "sub_categories"
+    },
+    "emoji": {
+      "type": "string"
     }
   }
 }

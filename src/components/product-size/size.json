@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_product_size_sizes",
+  "info": {
+    "displayName": "Size"
+  },
+  "options": {},
+  "attributes": {
+    "length_cm": {
+      "type": "integer"
+    },
+    "base_cm": {
+      "type": "integer"
+    },
+    "height": {
+      "type": "integer"
+    }
+  },
+  "config": {}
+}
