@@ -113,6 +113,16 @@
       "relation": "oneToMany",
       "target": "api::notification.notification",
       "mappedBy": "user"
+    },
+    "clerkId": {
+      "type": "string",
+      "unique": true
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
     }
   }
 }
