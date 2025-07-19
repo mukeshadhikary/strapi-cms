@@ -710,6 +710,31 @@ export interface ApiCouponCoupon extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiFuckFuck extends Struct.CollectionTypeSchema {
+  collectionName: 'fucks';
+  info: {
+    displayName: 'fuck';
+    pluralName: 'fucks';
+    singularName: 'fuck';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    fuck: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::fuck.fuck'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   collectionName: 'globals';
   info: {
@@ -1974,6 +1999,7 @@ declare module '@strapi/strapi' {
       'api::category.category': ApiCategoryCategory;
       'api::collection-section.collection-section': ApiCollectionSectionCollectionSection;
       'api::coupon.coupon': ApiCouponCoupon;
+      'api::fuck.fuck': ApiFuckFuck;
       'api::global.global': ApiGlobalGlobal;
       'api::inventory.inventory': ApiInventoryInventory;
       'api::item-in-cart.item-in-cart': ApiItemInCartItemInCart;
