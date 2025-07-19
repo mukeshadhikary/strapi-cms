@@ -1,72 +1,5 @@
 import crypto from 'crypto';
 
-// module.exports = {
-//   async handleWebhook(ctx) {
-//     const webhookSecret = process.env.CLERK_WEBHOOK_SECRET;
-//     const receivedSig = ctx.request.headers['clerk-signature'];
-//     const rawBody = ctx.request.body;
-
-//     // 1. Verify Clerk webhook signature
-//     const expectedSig = crypto
-//       .createHmac('sha256', webhookSecret)
-//       .update(JSON.stringify(rawBody))
-//       .digest('hex');
-
-//     if (receivedSig !== expectedSig) {
-//       return ctx.unauthorized('Invalid webhook signature');
-//     }
-
-//     const { id, email_addresses, first_name, last_name, username } = rawBody;
-
-//     const email = email_addresses?.[0]?.email_address || null;
-
-//     if (!email) return ctx.badRequest('Email not found');
-
-//     // 2. Find user by email or Clerk ID
-//     const existingUsers = await strapi.entityService.findMany('plugin::users-permissions.user', {
-//       filters: {
-//         $or: [
-//           { email: email },
-//           { clerk_id: id },
-//         ],
-//       },
-//     });
-
-//     const userData = {
-//       email,
-//       username: username || email.split('@')[0],
-//       clerk_id: id,
-//       first_name,
-//       last_name,
-//       confirmed: true,
-//     };
-
-//     let user;
-
-//     if (existingUsers.length > 0) {
-//       // 3. Update existing user
-//       user = await strapi.entityService.update(
-//         'plugin::users-permissions.user',
-//         existingUsers[0].id,
-//         { data: userData }
-//       );
-//     } else {
-//       // 4. Create user without password
-//       user = await strapi.entityService.create('plugin::users-permissions.user', {
-//         data: {
-//           ...userData,
-//           password: crypto.randomBytes(32).toString('hex'), // set random password just in case
-//         },
-//       });
-//     }
-
-//     ctx.send({ ok: true, user });
-//   },
-// };
-
-
-
-
 
 
 module.exports = {
@@ -117,38 +50,62 @@ module.exports = {
 
   // Security: Verify the webhook is really from Clerk
   async verifyWebhookSignature(body, headers) {
-    const secret = process.env.CLERK_WEBHOOK_SECRET;
+  const secret = process.env.CLERK_WEBHOOK_SECRET;
 
-    if (!secret) {
-      console.error("❌ CLERK_WEBHOOK_SECRET not found in .env file");
+  if (!secret) {
+    console.error("❌ CLERK_WEBHOOK_SECRET not found");
+    return false;
+  }
+
+  // For testing, you can temporarily return true
+  // return true; // REMOVE THIS LINE AFTER TESTING
+
+  try {
+    const svixId = headers["svix-id"];
+    const svixTimestamp = headers["svix-timestamp"];
+    const svixSignature = headers["svix-signature"];
+
+    console.log("🔍 Debug headers:");
+    console.log("svix-id:", svixId);
+    console.log("svix-timestamp:", svixTimestamp);
+    console.log("svix-signature:", svixSignature);
+
+    if (!svixId || !svixTimestamp || !svixSignature) {
+      console.error("❌ Missing required headers");
       return false;
     }
 
-    try {
-      const signature = headers["svix-signature"];
-      const timestamp = headers["svix-timestamp"];
+    // Get the raw body
+    const payload = JSON.stringify(body);
+    
+    // Create signed payload
+    const signedPayload = `${svixId}.${svixTimestamp}.${payload}`;
+    
+    // Extract the base64 part from webhook secret
+    const secretBytes = Buffer.from(secret.split('_')[1], 'base64');
+    
+    // Generate expected signature
+    const expectedSignature = crypto
+      .createHmac('sha256', secretBytes)
+      .update(signedPayload, 'utf8')
+      .digest('base64');
 
-      if (!signature || !timestamp) {
-        console.error("❌ Missing signature or timestamp");
-        return false;
-      }
+    // Extract signature from header (format: v1=signature)
+    const receivedSignature = svixSignature.split('=')[1];
+    
+    console.log("Expected:", expectedSignature);
+    console.log("Received:", receivedSignature);
+    
+    const isValid = receivedSignature === expectedSignature;
+    console.log("Valid:", isValid);
+    
+    return isValid;
 
-      // Create expected signature
-      const payload = JSON.stringify(body);
-      const expectedSignature = crypto
-        .createHmac("sha256", secret)
-        .update(`${timestamp}.${payload}`)
-        .digest("base64");
-
-      const expectedSig = `v1,${expectedSignature}`;
-
-      return signature === expectedSig;
-    } catch (error) {
-      console.error("❌ Signature verification failed:", error);
-      return false;
-    }
-  },
-
+  } catch (error) {
+    console.error("❌ Verification error:", error);
+    return false;
+  }
+},
   // Handle when a new user signs up in Clerk
   async handleUserCreated(userData) {
     console.log("👤 Creating new user from Clerk");
